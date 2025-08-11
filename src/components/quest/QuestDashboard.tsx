@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { Quest, QuestFilters, PlayerStats } from '../../types/quest'
-import { QuestStorage } from '../../lib/storage'
+import { QuestAPI } from '../../lib/api'
 import { calculateLevel } from '../../lib/utils'
 import { QuestCard } from './QuestCard'
 import { QuestForm } from './QuestForm'
@@ -11,6 +11,7 @@ import { Button } from '../ui/Button'
 import { Select } from '../ui/Select'
 import { Input } from '../ui/Input'
 import { Modal } from '../ui/Modal'
+import { UserProfile } from '../ui/UserProfile'
 import { 
   Plus, 
   Filter, 
@@ -47,32 +48,24 @@ export function QuestDashboard() {
     loadStats()
   }, [])
 
-  const loadQuests = () => {
-    const loadedQuests = QuestStorage.getQuests()
-    setQuests(loadedQuests)
-  }
-
-  const loadStats = () => {
-    const loadedStats = QuestStorage.getStats()
-    setStats(loadedStats)
-  }
-
-  const updateStats = (updatedQuests: Quest[]) => {
-    const completedQuests = updatedQuests.filter(q => q.status === 'completed')
-    const totalXP = completedQuests.reduce((sum, quest) => sum + quest.xpReward, 0)
-    
-    const newStats: PlayerStats = {
-      totalXP,
-      level: calculateLevel(totalXP),
-      questsCompleted: completedQuests.length,
-      currentStreak: calculateCurrentStreak(completedQuests),
-      longestStreak: Math.max(stats.longestStreak, calculateCurrentStreak(completedQuests)),
-      totalQuestsCreated: updatedQuests.length,
+  const loadQuests = async () => {
+    try {
+      const loadedQuests = await QuestAPI.getQuests()
+      setQuests(loadedQuests)
+    } catch (error) {
+      console.error('Failed to load quests:', error)
     }
-    
-    setStats(newStats)
-    QuestStorage.saveStats(newStats)
   }
+
+  const loadStats = async () => {
+    try {
+      const loadedStats = await QuestAPI.getStats()
+      setStats(loadedStats)
+    } catch (error) {
+      console.error('Failed to load stats:', error)
+    }
+  }
+
 
   const calculateCurrentStreak = (completedQuests: Quest[]): number => {
     if (completedQuests.length === 0) return 0
@@ -107,56 +100,58 @@ export function QuestDashboard() {
     return streak
   }
 
-  const saveQuest = (quest: Quest) => {
-    let updatedQuests: Quest[]
-    
-    if (editingQuest) {
-      updatedQuests = quests.map(q => q.id === quest.id ? quest : q)
-    } else {
-      updatedQuests = [...quests, quest]
+  const saveQuest = async (quest: Quest) => {
+    try {
+      if (editingQuest) {
+        const updatedQuest = await QuestAPI.updateQuest(quest.id, quest)
+        setQuests(quests.map(q => q.id === quest.id ? updatedQuest : q))
+      } else {
+        const newQuest = await QuestAPI.createQuest(quest)
+        setQuests([...quests, newQuest])
+      }
+      
+      // Refresh stats after saving
+      loadStats()
+      setIsModalOpen(false)
+      setEditingQuest(undefined)
+    } catch (error) {
+      console.error('Failed to save quest:', error)
     }
-    
-    setQuests(updatedQuests)
-    QuestStorage.saveQuests(updatedQuests)
-    updateStats(updatedQuests)
-    
-    setIsModalOpen(false)
-    setEditingQuest(undefined)
   }
 
-  const completeQuest = (questId: string) => {
-    const updatedQuests = quests.map(quest =>
-      quest.id === questId
-        ? { ...quest, status: 'completed' as const, completedAt: new Date() }
-        : quest
-    )
-    
-    setQuests(updatedQuests)
-    QuestStorage.saveQuests(updatedQuests)
-    updateStats(updatedQuests)
+  const completeQuest = async (questId: string) => {
+    try {
+      const updatedQuest = await QuestAPI.updateQuest(questId, { status: 'completed' })
+      setQuests(quests.map(q => q.id === questId ? updatedQuest : q))
+      loadStats() // Refresh stats after completion
+    } catch (error) {
+      console.error('Failed to complete quest:', error)
+    }
   }
 
-  const deleteQuest = (questId: string) => {
+  const deleteQuest = async (questId: string) => {
     if (!confirm('Are you sure you want to delete this quest?')) return
     
-    const updatedQuests = quests.filter(quest => quest.id !== questId)
-    setQuests(updatedQuests)
-    QuestStorage.saveQuests(updatedQuests)
-    updateStats(updatedQuests)
+    try {
+      await QuestAPI.deleteQuest(questId)
+      setQuests(quests.filter(quest => quest.id !== questId))
+      loadStats() // Refresh stats after deletion
+    } catch (error) {
+      console.error('Failed to delete quest:', error)
+    }
   }
 
-  const toggleQuestStatus = (questId: string) => {
-    const updatedQuests = quests.map(quest =>
-      quest.id === questId
-        ? { 
-            ...quest, 
-            status: quest.status === 'active' ? 'paused' as const : 'active' as const 
-          }
-        : quest
-    )
-    
-    setQuests(updatedQuests)
-    QuestStorage.saveQuests(updatedQuests)
+  const toggleQuestStatus = async (questId: string) => {
+    try {
+      const quest = quests.find(q => q.id === questId)
+      if (!quest) return
+      
+      const newStatus = quest.status === 'active' ? 'paused' : 'active'
+      const updatedQuest = await QuestAPI.updateQuest(questId, { status: newStatus })
+      setQuests(quests.map(q => q.id === questId ? updatedQuest : q))
+    } catch (error) {
+      console.error('Failed to toggle quest status:', error)
+    }
   }
 
   const editQuest = (quest: Quest) => {
@@ -174,7 +169,7 @@ export function QuestDashboard() {
     .filter(quest => {
       if (filters.status && quest.status !== filters.status) return false
       if (filters.priority && quest.priority !== filters.priority) return false
-      if (filters.tag && !quest.tags.includes(filters.tag)) return false
+      if (filters.category && quest.category !== filters.category) return false
       if (searchQuery && !quest.title.toLowerCase().includes(searchQuery.toLowerCase())) return false
       return true
     })
@@ -213,6 +208,9 @@ export function QuestDashboard() {
   return (
     <div className="min-h-screen bg-gradient-gaming">
       <div className="container mx-auto px-4 py-8">
+        {/* User Profile */}
+        <UserProfile />
+        
         {/* Header */}
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
           <div className="flex-1">

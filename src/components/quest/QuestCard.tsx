@@ -9,7 +9,6 @@ import {
   getTimeUntilDue 
 } from '../../lib/utils'
 import { 
-  Clock, 
   Calendar, 
   Star, 
   CheckCircle2, 
@@ -100,12 +99,6 @@ export function QuestCard({
             </div>
           )}
           
-          {quest.estimatedTime && (
-            <div className="flex items-center gap-1">
-              <Clock className="h-4 w-4" />
-              <span>{quest.estimatedTime}min</span>
-            </div>
-          )}
           
           <div className="flex items-center gap-1 text-primary-400">
             <Star className="h-4 w-4" />
@@ -113,18 +106,6 @@ export function QuestCard({
           </div>
         </div>
 
-        {quest.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-3">
-            {quest.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2 py-1 bg-primary-400/10 text-primary-400 rounded-full"
-              >
-                #{tag}
-              </span>
-            ))}
-          </div>
-        )}
       </CardContent>
 
       <CardFooter className="pt-3">

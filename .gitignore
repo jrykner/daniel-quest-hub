@@ -81,3 +81,5 @@ web_search.py
 .qwen/
 .ssh/
 __pycache__/
+
+/src/generated/prisma

@@ -1,18 +1,26 @@
 export type QuestPriority = 'low' | 'medium' | 'high' | 'critical'
 export type QuestStatus = 'active' | 'completed' | 'paused'
+export type QuestCategory = 'school' | 'health' | 'chores' | 'personal'
+
+export interface QuestUser {
+  id: string
+  name: string
+  role: string
+}
 
 export interface Quest {
   id: string
   title: string
-  description?: string
+  description: string
   priority: QuestPriority
   status: QuestStatus
+  category: QuestCategory
   xpReward: number
   createdAt: Date
   completedAt?: Date
   dueDate?: Date
-  tags: string[]
-  estimatedTime?: number // in minutes
+  assignedTo: QuestUser
+  createdBy: QuestUser
 }
 
 export interface PlayerStats {
@@ -27,7 +35,7 @@ export interface PlayerStats {
 export interface QuestFilters {
   status?: QuestStatus
   priority?: QuestPriority
-  tag?: string
+  category?: QuestCategory
   sortBy?: 'createdAt' | 'priority' | 'dueDate' | 'xpReward'
   sortOrder?: 'asc' | 'desc'
 }

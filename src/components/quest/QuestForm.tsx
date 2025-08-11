@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Quest, QuestPriority } from '../../types/quest'
+import { Quest, QuestPriority, QuestCategory } from '../../types/quest'
 import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
 import { Select } from '../ui/Select'
@@ -17,9 +17,8 @@ export function QuestForm({ quest, onSave, onCancel }: QuestFormProps) {
     title: quest?.title || '',
     description: quest?.description || '',
     priority: quest?.priority || 'medium' as QuestPriority,
+    category: quest?.category || 'personal' as QuestCategory,
     dueDate: quest?.dueDate ? format(quest.dueDate, 'yyyy-MM-dd') : '',
-    estimatedTime: quest?.estimatedTime?.toString() || '',
-    tags: quest?.tags.join(', ') || '',
   })
 
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -31,10 +30,6 @@ export function QuestForm({ quest, onSave, onCancel }: QuestFormProps) {
       newErrors.title = 'Quest title is required'
     }
 
-    if (formData.estimatedTime && (isNaN(Number(formData.estimatedTime)) || Number(formData.estimatedTime) < 1)) {
-      newErrors.estimatedTime = 'Estimated time must be a positive number'
-    }
-
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -44,23 +39,19 @@ export function QuestForm({ quest, onSave, onCancel }: QuestFormProps) {
     
     if (!validateForm()) return
 
-    const tags = formData.tags
-      .split(',')
-      .map(tag => tag.trim())
-      .filter(tag => tag.length > 0)
-
     const questData: Quest = {
       id: quest?.id || generateId(),
       title: formData.title.trim(),
-      description: formData.description.trim() || undefined,
+      description: formData.description.trim(),
       priority: formData.priority,
+      category: formData.category,
       status: quest?.status || 'active',
       xpReward: calculateXP(formData.priority),
       createdAt: quest?.createdAt || new Date(),
       completedAt: quest?.completedAt,
       dueDate: formData.dueDate ? new Date(formData.dueDate) : undefined,
-      tags,
-      estimatedTime: formData.estimatedTime ? Number(formData.estimatedTime) : undefined,
+      assignedTo: quest?.assignedTo || { id: '', name: '', role: '' }, // Will be set by API
+      createdBy: quest?.createdBy || { id: '', name: '', role: '' }, // Will be set by API
     }
 
     onSave(questData)
@@ -71,6 +62,13 @@ export function QuestForm({ quest, onSave, onCancel }: QuestFormProps) {
     { value: 'medium', label: '🟡 Medium - Normal quest (25 XP)' },
     { value: 'high', label: '🟠 High - Challenging quest (50 XP)' },
     { value: 'critical', label: '🔴 Critical - Epic quest (100 XP)' },
+  ]
+
+  const categoryOptions = [
+    { value: 'school', label: '📚 School' },
+    { value: 'health', label: '🏥 Health' },
+    { value: 'chores', label: '🧹 Chores' },
+    { value: 'personal', label: '⭐ Personal' },
   ]
 
   return (
@@ -117,52 +115,29 @@ export function QuestForm({ quest, onSave, onCancel }: QuestFormProps) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="dueDate" className="block text-sm font-medium text-text-primary mb-1">
-            Due Date
-          </label>
-          <Input
-            id="dueDate"
-            type="date"
-            value={formData.dueDate}
-            onChange={(e) => setFormData(prev => ({ ...prev, dueDate: e.target.value }))}
-            min={format(new Date(), 'yyyy-MM-dd')}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="estimatedTime" className="block text-sm font-medium text-text-primary mb-1">
-            Estimated Time (min)
-          </label>
-          <Input
-            id="estimatedTime"
-            type="number"
-            min="1"
-            value={formData.estimatedTime}
-            onChange={(e) => setFormData(prev => ({ ...prev, estimatedTime: e.target.value }))}
-            placeholder="30"
-            className={errors.estimatedTime ? 'border-red-400' : ''}
-          />
-          {errors.estimatedTime && (
-            <p className="text-red-400 text-xs mt-1">{errors.estimatedTime}</p>
-          )}
-        </div>
+      <div>
+        <label htmlFor="category" className="block text-sm font-medium text-text-primary mb-1">
+          Category
+        </label>
+        <Select
+          id="category"
+          value={formData.category}
+          onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value as QuestCategory }))}
+          options={categoryOptions}
+        />
       </div>
 
       <div>
-        <label htmlFor="tags" className="block text-sm font-medium text-text-primary mb-1">
-          Tags
+        <label htmlFor="dueDate" className="block text-sm font-medium text-text-primary mb-1">
+          Due Date (Optional)
         </label>
         <Input
-          id="tags"
-          value={formData.tags}
-          onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
-          placeholder="work, personal, urgent (separate with commas)"
+          id="dueDate"
+          type="date"
+          value={formData.dueDate}
+          onChange={(e) => setFormData(prev => ({ ...prev, dueDate: e.target.value }))}
+          min={format(new Date(), 'yyyy-MM-dd')}
         />
-        <p className="text-text-secondary text-xs mt-1">
-          Separate multiple tags with commas
-        </p>
       </div>
 
       <div className="flex justify-end gap-3 pt-4">

@@ -16,6 +16,22 @@
       "allowedTools": [],
       "history": [
         {
+          "display": "are you back?",
+          "pastedContents": {}
+        },
+        {
+          "display": "please read the project.md file check what was done and what is missing  then proceed with the development of the next phase of the daniel-quest-hub project,for example it seems to be missing the user management component",
+          "pastedContents": {}
+        },
+        {
+          "display": "!git push origin main",
+          "pastedContents": {}
+        },
+        {
+          "display": "you added to the github folder for the daniel-quest-hub other files from the root folder of the server that are not relevant to this project as well as folders who are not relevant, please remove from the github repo all files that are on the root level of this vps server that are not related to daniel project but be sure to leave them on the vps do not delete the local files and folders, just don't push to this repo irrelevant files and folders",
+          "pastedContents": {}
+        },
+        {
           "display": "still get error on deployment from vercel, please consider whether it would be better and easier to just merge and adjust the child folder into the root parent folder to avoid such path issues now and in the future. here is the error log: [Pasted text #1 +36 lines]",
           "pastedContents": {
             "1": {
