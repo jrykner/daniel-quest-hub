@@ -6,7 +6,7 @@ export default function Home() {
         <div className="text-center mb-16">
           <h1 className="font-gaming text-6xl font-bold mb-4">
             <span className="gaming-gradient bg-clip-text text-transparent">
-              Daniel's Quest Hub
+              Daniel&apos;s Quest Hub
             </span>
           </h1>
           <p className="text-text-secondary text-xl mb-8 max-w-2xl mx-auto">
