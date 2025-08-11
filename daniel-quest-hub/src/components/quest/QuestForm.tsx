@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Quest, QuestPriority } from '@/types/quest'
-import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
-import { Select } from '@/components/ui/Select'
-import { calculateXP, generateId } from '@/lib/utils'
+import { Quest, QuestPriority } from '../../types/quest'
+import { Button } from '../ui/Button'
+import { Input } from '../ui/Input'
+import { Select } from '../ui/Select'
+import { calculateXP, generateId } from '../../lib/utils'
 import { format } from 'date-fns'
 
 interface QuestFormProps {

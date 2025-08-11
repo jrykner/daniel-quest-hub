@@ -1,16 +1,16 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Quest, QuestFilters, PlayerStats } from '@/types/quest'
-import { QuestStorage } from '@/lib/storage'
-import { calculateLevel } from '@/lib/utils'
+import { Quest, QuestFilters, PlayerStats } from '../../types/quest'
+import { QuestStorage } from '../../lib/storage'
+import { calculateLevel } from '../../lib/utils'
 import { QuestCard } from './QuestCard'
 import { QuestForm } from './QuestForm'
 import { StatsCard } from './StatsCard'
-import { Button } from '@/components/ui/Button'
-import { Select } from '@/components/ui/Select'
-import { Input } from '@/components/ui/Input'
-import { Modal } from '@/components/ui/Modal'
+import { Button } from '../ui/Button'
+import { Select } from '../ui/Select'
+import { Input } from '../ui/Input'
+import { Modal } from '../ui/Modal'
 import { 
   Plus, 
   Filter, 

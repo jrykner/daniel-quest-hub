@@ -1,7 +1,7 @@
 import React from 'react'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
-import { PlayerStats } from '@/types/quest'
-import { calculateLevel, getXPForNextLevel } from '@/lib/utils'
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card'
+import { PlayerStats } from '../../types/quest'
+import { calculateLevel, getXPForNextLevel } from '../../lib/utils'
 import { Trophy, Target, Zap, Flame } from 'lucide-react'
 
 interface StatsCardProps {

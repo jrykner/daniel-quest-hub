@@ -1,5 +1,5 @@
 import { type ClassValue, clsx } from 'clsx'
-import { QuestPriority } from '@/types/quest'
+import { QuestPriority } from '../types/quest'
 
 export function cn(...inputs: ClassValue[]) {
   return clsx(inputs)

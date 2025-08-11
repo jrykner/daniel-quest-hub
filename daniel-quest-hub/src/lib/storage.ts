@@ -1,4 +1,4 @@
-import { Quest, PlayerStats } from '@/types/quest'
+import { Quest, PlayerStats } from '../types/quest'
 
 const QUESTS_KEY = 'daniel-quest-hub-quests'
 const STATS_KEY = 'daniel-quest-hub-stats'

@@ -1,13 +1,13 @@
 import React from 'react'
 import { format } from 'date-fns'
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/Card'
-import { Button } from '@/components/ui/Button'
-import { Quest } from '@/types/quest'
+import { Card, CardHeader, CardContent, CardFooter } from '../ui/Card'
+import { Button } from '../ui/Button'
+import { Quest } from '../../types/quest'
 import { 
   getPriorityColor, 
   getPriorityEmoji, 
   getTimeUntilDue 
-} from '@/lib/utils'
+} from '../../lib/utils'
 import { 
   Clock, 
   Calendar, 
