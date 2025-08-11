@@ -1,22 +1,17 @@
 [
   {
-    "content": "Debug 401 unauthorized error in credentials callback",
-    "status": "completed",
+    "content": "Debug Supabase DATABASE_URL environment variable issue",
+    "status": "in_progress",
     "id": "1"
   },
   {
-    "content": "Check NextAuth credentials provider authorization logic",
-    "status": "completed",
+    "content": "Check Vercel environment variable configuration",
+    "status": "pending",
     "id": "2"
   },
   {
-    "content": "Fix authentication flow to allow user creation",
-    "status": "completed",
-    "id": "3"
-  },
-  {
-    "content": "Test deployment with improved error handling",
+    "content": "Run Prisma migrations on Supabase database",
     "status": "pending",
-    "id": "4"
+    "id": "3"
   }
 ]

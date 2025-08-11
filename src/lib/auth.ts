@@ -22,6 +22,9 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         try {
           console.log('NextAuth authorize called with:', credentials)
+          console.log('Available env vars (filtered):', Object.keys(process.env).filter(key => 
+            key.includes('DATABASE') || key.includes('POSTGRES') || key.includes('SUPABASE')
+          ).map(key => `${key}: ${process.env[key] ? 'SET' : 'NOT SET'}`))
           
           if (!credentials?.email) {
             console.log('No email provided')
