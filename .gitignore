@@ -39,3 +39,45 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# VPS Server Files (not part of Daniel Quest Hub project)
+VC/
+calendar_auth.py
+complete_calendar_auth.py
+currency_monitor.log
+daily_summary_automation.log
+daily_summary_automation.py
+fix_google_oauth_setup.md
+gcp-oauth.keys.json
+get_chat_id.py
+google_calendar_setup_instructions.md
+gpt_agent/
+morning-briefing.timer.backup
+morning_briefing.log
+morning_briefing.py
+obsidian-jrykner/
+token.json
+usd_ils_data.json
+usd_ils_monitor.log
+usd_ils_monitor.py
+vercel_commands.md
+vercel_deploy_helper.py
+vercel_deployment_ready.md
+vercel_setup.md
+vercel_test_project/
+web_search.py
+
+# Claude Code files
+.claude/
+.bash_history
+.bashrc*
+.cache/
+.config/
+.gitconfig
+.local/
+.npm/
+.nvm/
+.profile
+.qwen/
+.ssh/
+__pycache__/

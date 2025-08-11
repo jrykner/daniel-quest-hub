@@ -1,21 +1,21 @@
 [
   {
-    "content": "Move all project files from daniel-quest-hub/ to root directory",
+    "content": "Review what files are currently in the repository",
     "status": "completed",
     "id": "1"
   },
   {
-    "content": "Update any remaining path references",
+    "content": "Remove all non-project files from git tracking",
     "status": "completed",
     "id": "2"
   },
   {
-    "content": "Test local build after restructure",
+    "content": "Update .gitignore to prevent future issues",
     "status": "completed",
     "id": "3"
   },
   {
-    "content": "Commit and push the restructured project",
+    "content": "Push clean repository to GitHub",
     "status": "in_progress",
     "id": "4"
   }
