@@ -32,6 +32,16 @@ export interface PlayerStats {
   totalQuestsCreated: number
 }
 
+export interface Achievement {
+  id: string
+  userId: string
+  title: string
+  description: string
+  icon: string
+  xpEarned: number
+  unlockedAt: Date
+}
+
 export interface QuestFilters {
   status?: QuestStatus
   priority?: QuestPriority
