@@ -1,0 +1,22 @@
+[
+  {
+    "content": "Move all project files from daniel-quest-hub/ to root directory",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "Update any remaining path references",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "Test local build after restructure",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "Commit and push the restructured project",
+    "status": "in_progress",
+    "id": "4"
+  }
+]

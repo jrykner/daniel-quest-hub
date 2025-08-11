@@ -1,0 +1,86 @@
+[
+  {
+    "debug": "Starting connection attempt",
+    "timestamp": "2025-08-07T18:48:42.798Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-07T18:48:42.849Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "Starting connection attempt",
+    "timestamp": "2025-08-07T18:48:43.139Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-07T18:48:43.708Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-07T18:48:44.025Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "Connection attempt completed in 1228ms - status: connected",
+    "timestamp": "2025-08-07T18:48:44.028Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-07T18:48:44.029Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "Connection attempt completed in 890ms - status: connected",
+    "timestamp": "2025-08-07T18:48:44.030Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "Calling MCP tool: tasks-list-by-date",
+    "timestamp": "2025-08-07T18:49:25.128Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-07T18:49:25.132Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "Tool call succeeded: {\"content\":[{\"type\":\"text\",\"text\":\"{\\n  \\\"tasks\\\": [\\n    {\\n      \\\"id\\\": \\\"63p8VQ9H9V6F4C3C\\\",\\n      \\\"content\\\": \\\"Schedule Date with Rachel\\\",\\n      \\\"description\\\": \\\"\\\",\\n      \\\"dueDate\\\": \\\"2025-08-07\\\",\\n      \\\"recurring\\\": \\\"every thursday\\\",\\n      \\\"priority\\\": 1,\\n      \\\"projectId\\\": \\\"6CrfM5M65G6G3xcC\\\",\\n      \\\"sectionId\\\": null,\\n      \\\"parentId\\\": null,\\n      \\\"labels\\\": []\\n    }\\n  ],\\n  \\\"nextCursor\\\": null\\n}\",\"mimeType\":\"application/json\"}]}",
+    "timestamp": "2025-08-07T18:49:26.603Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "Calling MCP tool: tasks-add-multiple",
+    "timestamp": "2025-08-07T18:49:33.898Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-07T18:49:33.900Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  },
+  {
+    "debug": "Tool call succeeded: {\"content\":[{\"type\":\"text\",\"text\":\"[\\n  {\\n    \\\"id\\\": \\\"6cXpcg3C7vgwcV63\\\",\\n    \\\"content\\\": \\\"Convert USD to ILS\\\",\\n    \\\"description\\\": \\\"\\\",\\n    \\\"dueDate\\\": \\\"2025-08-08T11:00:00\\\",\\n    \\\"recurring\\\": false,\\n    \\\"priority\\\": 4,\\n    \\\"projectId\\\": \\\"6CrfM5M65RWFVh83\\\",\\n    \\\"sectionId\\\": null,\\n    \\\"parentId\\\": null,\\n    \\\"labels\\\": []\\n  }\\n]\",\"mimeType\":\"application/json\"}]}",
+    "timestamp": "2025-08-07T18:49:34.933Z",
+    "sessionId": "6e7863a2-d943-48e9-a8ac-7c9cbee3a627",
+    "cwd": "/root"
+  }
+]

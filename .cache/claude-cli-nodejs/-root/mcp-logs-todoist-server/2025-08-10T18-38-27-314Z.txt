@@ -1,0 +1,14 @@
+[
+  {
+    "debug": "Starting connection attempt",
+    "timestamp": "2025-08-10T18:38:37.315Z",
+    "sessionId": "81e86a83-ea02-455d-8b90-4d801ad8cb66",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-10T18:38:37.375Z",
+    "sessionId": "81e86a83-ea02-455d-8b90-4d801ad8cb66",
+    "cwd": "/root"
+  }
+]

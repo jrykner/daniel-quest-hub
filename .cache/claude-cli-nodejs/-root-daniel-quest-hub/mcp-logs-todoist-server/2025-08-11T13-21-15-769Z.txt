@@ -1,0 +1,14 @@
+[
+  {
+    "debug": "Starting connection attempt",
+    "timestamp": "2025-08-11T13:21:16.237Z",
+    "sessionId": "f55e266b-7905-4134-976c-8e740185b890",
+    "cwd": "/root/daniel-quest-hub"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-11T13:21:16.321Z",
+    "sessionId": "f55e266b-7905-4134-976c-8e740185b890",
+    "cwd": "/root/daniel-quest-hub"
+  }
+]

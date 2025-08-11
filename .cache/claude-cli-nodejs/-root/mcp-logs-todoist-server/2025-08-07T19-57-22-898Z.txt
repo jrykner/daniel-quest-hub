@@ -1,0 +1,20 @@
+[
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-07T19:57:23.681Z",
+    "sessionId": "c4f138b7-758c-44fd-9bf7-b4524a4525ab",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-07T19:57:24.272Z",
+    "sessionId": "c4f138b7-758c-44fd-9bf7-b4524a4525ab",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-07T19:57:24.601Z",
+    "sessionId": "c4f138b7-758c-44fd-9bf7-b4524a4525ab",
+    "cwd": "/root"
+  }
+]

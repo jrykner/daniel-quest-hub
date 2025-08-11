@@ -1,0 +1,16 @@
+[
+  {
+    "sessionId": "e0e310b1-d2f0-49cb-86d6-47f74f9f8cca",
+    "messageId": 0,
+    "type": "user",
+    "message": "what's the latest about GPT5?",
+    "timestamp": "2025-08-10T14:03:41.926Z"
+  },
+  {
+    "sessionId": "e0e310b1-d2f0-49cb-86d6-47f74f9f8cca",
+    "messageId": 1,
+    "type": "user",
+    "message": "why does websearch not work? please check,diagnose, then fix",
+    "timestamp": "2025-08-10T14:04:25.975Z"
+  }
+]

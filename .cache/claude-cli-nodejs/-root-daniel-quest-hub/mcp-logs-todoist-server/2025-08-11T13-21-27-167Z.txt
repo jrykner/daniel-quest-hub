@@ -1,0 +1,50 @@
+[
+  {
+    "debug": "Starting connection attempt",
+    "timestamp": "2025-08-11T13:21:30.835Z",
+    "sessionId": "402c09df-0d32-4d20-bb29-2ab96212f693",
+    "cwd": "/root/daniel-quest-hub"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-11T13:21:30.883Z",
+    "sessionId": "402c09df-0d32-4d20-bb29-2ab96212f693",
+    "cwd": "/root/daniel-quest-hub"
+  },
+  {
+    "debug": "Starting connection attempt",
+    "timestamp": "2025-08-11T13:21:31.326Z",
+    "sessionId": "402c09df-0d32-4d20-bb29-2ab96212f693",
+    "cwd": "/root/daniel-quest-hub"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-11T13:21:36.472Z",
+    "sessionId": "402c09df-0d32-4d20-bb29-2ab96212f693",
+    "cwd": "/root/daniel-quest-hub"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-11T13:21:36.887Z",
+    "sessionId": "402c09df-0d32-4d20-bb29-2ab96212f693",
+    "cwd": "/root/daniel-quest-hub"
+  },
+  {
+    "debug": "Connection attempt completed in 6053ms - status: connected",
+    "timestamp": "2025-08-11T13:21:36.889Z",
+    "sessionId": "402c09df-0d32-4d20-bb29-2ab96212f693",
+    "cwd": "/root/daniel-quest-hub"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-11T13:21:36.890Z",
+    "sessionId": "402c09df-0d32-4d20-bb29-2ab96212f693",
+    "cwd": "/root/daniel-quest-hub"
+  },
+  {
+    "debug": "Connection attempt completed in 5564ms - status: connected",
+    "timestamp": "2025-08-11T13:21:36.891Z",
+    "sessionId": "402c09df-0d32-4d20-bb29-2ab96212f693",
+    "cwd": "/root/daniel-quest-hub"
+  }
+]

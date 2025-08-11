@@ -1,0 +1,50 @@
+[
+  {
+    "debug": "Starting connection attempt",
+    "timestamp": "2025-08-10T10:11:14.910Z",
+    "sessionId": "36009fdc-3cfb-4591-8374-e64122c36ea2",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-10T10:11:14.971Z",
+    "sessionId": "36009fdc-3cfb-4591-8374-e64122c36ea2",
+    "cwd": "/root"
+  },
+  {
+    "debug": "Starting connection attempt",
+    "timestamp": "2025-08-10T10:11:15.613Z",
+    "sessionId": "36009fdc-3cfb-4591-8374-e64122c36ea2",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-10T10:11:16.076Z",
+    "sessionId": "36009fdc-3cfb-4591-8374-e64122c36ea2",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-10T10:11:16.496Z",
+    "sessionId": "36009fdc-3cfb-4591-8374-e64122c36ea2",
+    "cwd": "/root"
+  },
+  {
+    "debug": "Connection attempt completed in 1588ms - status: connected",
+    "timestamp": "2025-08-10T10:11:16.500Z",
+    "sessionId": "36009fdc-3cfb-4591-8374-e64122c36ea2",
+    "cwd": "/root"
+  },
+  {
+    "debug": "No token data found",
+    "timestamp": "2025-08-10T10:11:16.502Z",
+    "sessionId": "36009fdc-3cfb-4591-8374-e64122c36ea2",
+    "cwd": "/root"
+  },
+  {
+    "debug": "Connection attempt completed in 889ms - status: connected",
+    "timestamp": "2025-08-10T10:11:16.503Z",
+    "sessionId": "36009fdc-3cfb-4591-8374-e64122c36ea2",
+    "cwd": "/root"
+  }
+]

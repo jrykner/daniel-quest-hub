@@ -1,0 +1,27 @@
+[
+  {
+    "content": "Analyze current alert logic to understand the issue",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "Modify script to track last alert rate instead of just daily open",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "Update check logic to compare against last alert rate",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "Ensure daily reset still works correctly",
+    "status": "completed",
+    "id": "4"
+  },
+  {
+    "content": "Test the modified logic",
+    "status": "completed",
+    "id": "5"
+  }
+]

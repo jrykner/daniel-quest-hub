@@ -1,0 +1,14 @@
+[Unit]
+Description=Morning Briefing Timer
+Requires=morning-briefing.service
+
+[Timer]
+# Run at 9:00 AM Israel time on Sunday through Thursday
+# Using UTC times: Israel is UTC+2 (standard) or UTC+3 (DST)
+# 9 AM Israel time = 7 AM UTC (standard) or 6 AM UTC (DST)
+# Setting for 6 AM UTC to cover DST, script handles timezone internally
+OnCalendar=Sun,Mon,Tue,Wed,Thu 06:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
