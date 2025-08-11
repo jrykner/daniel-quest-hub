@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "prisma generate && next build",
+    "build": "prisma generate && node scripts/migrate-db.js && next build",
     "start": "next start",
     "lint": "next lint",
     "db:init": "node scripts/init-db.js",

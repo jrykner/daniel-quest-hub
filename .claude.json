@@ -16,6 +16,16 @@
       "allowedTools": [],
       "history": [
         {
+          "display": "here is the latest error code log [Pasted text #1 +41 lines]",
+          "pastedContents": {
+            "1": {
+              "id": 1,
+              "type": "text",
+              "content": "2025-08-11T19:46:08.530Z [info] NextAuth authorize called with: {\n  email: 'jrykner@gmail.com',\n  name: 'Jeremie',\n  role: 'PARENT',\n  redirect: 'false',\n  csrfToken: 'da4907c701adcd0cb2620a916a5ee98a02ffb89b0c85b43b51758dd390e2eab2',\n  callbackUrl: 'https://daniel-quest-hub-jrykners-projects.vercel.app/auth/signin',\n  json: 'true'\n}\n2025-08-11T19:46:08.530Z [info] Available env vars (filtered): [\n  'NEXT_PUBLIC_SUPABASE_ANON_KEY: SET',\n  'NEXT_PUBLIC_SUPABASE_URL: SET',\n  'POSTGRES_DATABASE: SET',\n  'POSTGRES_HOST: SET',\n  'POSTGRES_PASSWORD: SET',\n  'POSTGRES_PRISMA_URL: SET',\n  'POSTGRES_URL: SET',\n  'POSTGRES_URL_NON_POOLING: SET',\n  'POSTGRES_USER: SET',\n  'SUPABASE_ANON_KEY: SET',\n  'SUPABASE_JWT_SECRET: SET',\n  'SUPABASE_SERVICE_ROLE_KEY: SET',\n  'SUPABASE_URL: SET'\n]\n2025-08-11T19:46:08.854Z [error] Error in authorize function: Error [PrismaClientKnownRequestError]: \nInvalid `prisma.user.findUnique()` invocation:\n\n\nThe table `public.User` does not exist in the current database.\n    at hI.handleRequestError (.next/server/chunks/529.js:114:8027)\n    at hI.handleAndLogRequestError (.next/server/chunks/529.js:114:7087)\n    at hI.request (.next/server/chunks/529.js:114:6794)\n    at async f (.next/server/chunks/529.js:126:7668)\n    at async Object.authorize (.next/server/chunks/529.js:1:1199)\n    at async Object.i (.next/server/chunks/577.js:34:55364)\n    at async q (.next/server/chunks/577.js:25:53781)\n    at async g (.next/server/chunks/577.js:17:22154)\n    at async a.length.b (.next/server/chunks/577.js:17:23595) {\n  code: 'P2021',\n  clientVersion: '6.13.0',\n  meta: [Object]\n}"
+            }
+          }
+        },
+        {
           "display": "It turns out I had no db on vercel, vercel suggested I use supabase so I created a db and connected supabase with vercel, it added the environment variables to my vercel project for this, now I tried again after redeploying still I got an error message after trying to create a user here is the error log: [Pasted text #1 +33 lines]",
           "pastedContents": {
             "1": {
@@ -457,10 +467,6 @@
         },
         {
           "display": "find in my obsidian-jrykner repo the date when was the readwise folder last updated? and bring me the latest text added to it",
-          "pastedContents": {}
-        },
-        {
-          "display": "gh auth login",
           "pastedContents": {}
         }
       ],
