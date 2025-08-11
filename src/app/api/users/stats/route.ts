@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../../../../lib/auth'
 import { prisma } from '../../../../lib/db'
 
 // GET /api/users/stats - Get user statistics
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions)
     
@@ -76,7 +76,7 @@ export async function GET(request: NextRequest) {
       })
 
       // Calculate current streak (consecutive days from today backwards)
-      let checkDate = new Date(today)
+      const checkDate = new Date(today)
       for (let i = 0; i < 30; i++) {
         const hasCompletionOnDay = completionDates.some(date => 
           date.toDateString() === checkDate.toDateString()

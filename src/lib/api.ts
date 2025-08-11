@@ -16,11 +16,11 @@ export class QuestAPI {
       const quests = await response.json()
       
       // Convert string dates back to Date objects
-      return quests.map((quest: any) => ({
+      return quests.map((quest: Record<string, unknown>) => ({
         ...quest,
-        createdAt: new Date(quest.createdAt),
-        completedAt: quest.completedAt ? new Date(quest.completedAt) : undefined,
-        dueDate: quest.dueDate ? new Date(quest.dueDate) : undefined,
+        createdAt: new Date(quest.createdAt as string),
+        completedAt: quest.completedAt ? new Date(quest.completedAt as string) : undefined,
+        dueDate: quest.dueDate ? new Date(quest.dueDate as string) : undefined,
       }))
     } catch (error) {
       console.error('Error fetching quests:', error)
@@ -68,7 +68,7 @@ export class QuestAPI {
   // Update an existing task/quest
   static async updateQuest(id: string, updates: Partial<Quest>): Promise<Quest> {
     try {
-      const requestBody: any = {}
+      const requestBody: Record<string, unknown> = {}
       
       if (updates.title !== undefined) requestBody.title = updates.title
       if (updates.description !== undefined) requestBody.description = updates.description

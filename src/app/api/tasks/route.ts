@@ -5,7 +5,7 @@ import { prisma } from '../../../lib/db'
 import { TaskPriority, TaskCategory } from '../../../generated/prisma'
 
 // GET /api/tasks - Get all tasks for the user
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions)
     

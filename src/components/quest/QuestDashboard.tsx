@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Quest, QuestFilters, PlayerStats } from '../../types/quest'
 import { QuestAPI } from '../../lib/api'
-import { calculateLevel } from '../../lib/utils'
+// import { calculateLevel } from '../../lib/utils'
 import { QuestCard } from './QuestCard'
 import { QuestForm } from './QuestForm'
 import { StatsCard } from './StatsCard'
@@ -67,38 +67,38 @@ export function QuestDashboard() {
   }
 
 
-  const calculateCurrentStreak = (completedQuests: Quest[]): number => {
-    if (completedQuests.length === 0) return 0
-    
-    const today = new Date()
-    const sortedCompleted = completedQuests
-      .filter(q => q.completedAt)
-      .sort((a, b) => b.completedAt!.getTime() - a.completedAt!.getTime())
-    
-    let streak = 0
-    const checkDate = new Date(today)
-    checkDate.setHours(0, 0, 0, 0)
-    
-    for (let i = 0; i < 30; i++) { // Check last 30 days max
-      const hasQuestOnDate = sortedCompleted.some(quest => {
-        const completedDate = new Date(quest.completedAt!)
-        completedDate.setHours(0, 0, 0, 0)
-        return completedDate.getTime() === checkDate.getTime()
-      })
-      
-      if (hasQuestOnDate) {
-        streak++
-        checkDate.setDate(checkDate.getDate() - 1)
-      } else if (i === 0 && checkDate.getTime() !== today.setHours(0, 0, 0, 0)) {
-        // If no quest today but we haven't checked today yet, don't break streak
-        checkDate.setDate(checkDate.getDate() - 1)
-      } else {
-        break
-      }
-    }
-    
-    return streak
-  }
+  // const calculateCurrentStreak = (completedQuests: Quest[]): number => {
+  //   if (completedQuests.length === 0) return 0
+  //   
+  //   const today = new Date()
+  //   const sortedCompleted = completedQuests
+  //     .filter(q => q.completedAt)
+  //     .sort((a, b) => b.completedAt!.getTime() - a.completedAt!.getTime())
+  //   
+  //   let streak = 0
+  //   const checkDate = new Date(today)
+  //   checkDate.setHours(0, 0, 0, 0)
+  //   
+  //   for (let i = 0; i < 30; i++) { // Check last 30 days max
+  //     const hasQuestOnDate = sortedCompleted.some(quest => {
+  //       const completedDate = new Date(quest.completedAt!)
+  //       completedDate.setHours(0, 0, 0, 0)
+  //       return completedDate.getTime() === checkDate.getTime()
+  //     })
+  //     
+  //     if (hasQuestOnDate) {
+  //       streak++
+  //       checkDate.setDate(checkDate.getDate() - 1)
+  //     } else if (i === 0 && checkDate.getTime() !== today.setHours(0, 0, 0, 0)) {
+  //       // If no quest today but we haven't checked today yet, don't break streak
+  //       checkDate.setDate(checkDate.getDate() - 1)
+  //     } else {
+  //       break
+  //     }
+  //   }
+  //   
+  //   return streak
+  // }
 
   const saveQuest = async (quest: Quest) => {
     try {
