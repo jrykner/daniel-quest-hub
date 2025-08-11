@@ -1,32 +1,22 @@
 [
   {
-    "content": "Analyze current implementation vs PROJECT.md roadmap",
+    "content": "Debug 401 unauthorized error in credentials callback",
     "status": "completed",
     "id": "1"
   },
   {
-    "content": "Set up authentication system (NextAuth.js)",
+    "content": "Check NextAuth credentials provider authorization logic",
     "status": "completed",
     "id": "2"
   },
   {
-    "content": "Set up database with Prisma and PostgreSQL",
+    "content": "Fix authentication flow to allow user creation",
     "status": "completed",
     "id": "3"
   },
   {
-    "content": "Create user management components",
-    "status": "completed",
+    "content": "Test deployment with improved error handling",
+    "status": "pending",
     "id": "4"
-  },
-  {
-    "content": "Replace local storage with database persistence",
-    "status": "completed",
-    "id": "5"
-  },
-  {
-    "content": "Add user roles and permissions",
-    "status": "completed",
-    "id": "6"
   }
 ]

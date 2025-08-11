@@ -29,8 +29,13 @@ export default function SignIn() {
         redirect: false,
       })
 
+      console.log('SignIn result:', result)
+
       if (result?.ok) {
         router.push('/')
+      } else {
+        console.error('Sign in failed:', result?.error)
+        alert(`Sign in failed: ${result?.error || 'Unknown error'}`)
       }
     } catch (error) {
       console.error('Sign in error:', error)
