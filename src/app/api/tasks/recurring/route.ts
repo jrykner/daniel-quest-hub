@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { PrismaClient } from '../../../../generated/prisma';
+import { authOptions } from '../../../../lib/auth';
+import { PrismaClient, TaskPriority, TaskCategory } from '../../../../generated/prisma';
 import { RecurringTaskService } from '@/services/recurringTasks';
 import GoogleCalendarService from '@/services/googleCalendar';
 
@@ -8,9 +9,9 @@ const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     
-    if (!session?.user?.email) {
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -28,7 +29,7 @@ export async function POST(request: NextRequest) {
 
     // Get user
     const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
+      where: { id: session.user.id },
       include: { calendarTokens: true },
     });
 
@@ -37,9 +38,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Get assigned user (for Daniel's case, it's likely Daniel)
-    const assignedUser = await prisma.user.findUnique({
-      where: { email: assignedToEmail || session.user.email },
-    });
+    const assignedUser = assignedToEmail 
+      ? await prisma.user.findUnique({ where: { email: assignedToEmail } })
+      : user;
 
     if (!assignedUser) {
       return NextResponse.json({ error: 'Assigned user not found' }, { status: 404 });
@@ -59,8 +60,8 @@ export async function POST(request: NextRequest) {
       data: {
         title,
         description,
-        priority,
-        category,
+        priority: priority.toUpperCase() as TaskPriority,
+        category: category.toUpperCase() as TaskCategory,
         xpReward,
         dueDate: new Date(dueDate),
         isRecurring: true,
@@ -116,8 +117,8 @@ export async function POST(request: NextRequest) {
           createdById: user.id,
           dueDate: instanceData.dueDate,
           completedAt: instanceData.completedAt,
-          priority: instanceData.priority.toUpperCase() as 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL',
-          category: instanceData.category.toUpperCase() as 'SCHOOL' | 'HEALTH' | 'CHORES' | 'PERSONAL',
+          priority: instanceData.priority.toUpperCase() as TaskPriority,
+          category: instanceData.category.toUpperCase() as TaskCategory,
           xpReward: instanceData.xpReward,
           isRecurring: instanceData.isRecurring,
         },
@@ -167,14 +168,14 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     
-    if (!session?.user?.email) {
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
+      where: { id: session.user.id },
     });
 
     if (!user) {
