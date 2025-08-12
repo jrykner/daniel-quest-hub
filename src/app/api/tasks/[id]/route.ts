@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../../../../lib/auth'
 import { prisma } from '../../../../lib/db'
-import { TaskPriority, TaskCategory } from '../../../../generated/prisma'
+import { TaskPriority, TaskCategory, UserRole } from '../../../../generated/prisma'
 
 // PUT /api/tasks/[id] - Update a task
 export async function PUT(
@@ -150,9 +150,23 @@ export async function DELETE(
       return NextResponse.json({ error: 'Task not found' }, { status: 404 })
     }
 
-    // Only creator can delete tasks
-    if (existingTask.createdById !== session.user.id) {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    // Get current user to check permissions
+    const currentUser = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { id: true, role: true }
+    })
+
+    if (!currentUser) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+    }
+
+    // Check deletion permissions based on role
+    const canDelete = currentUser.role === UserRole.PARENT 
+      ? (existingTask.createdById === session.user.id || existingTask.assignedToId === session.user.id)
+      : (existingTask.createdById === session.user.id)
+
+    if (!canDelete) {
+      return NextResponse.json({ error: 'Forbidden: You can only delete tasks you created' + (currentUser.role === UserRole.PARENT ? ' or are assigned to' : '') }, { status: 403 })
     }
 
     await prisma.task.delete({

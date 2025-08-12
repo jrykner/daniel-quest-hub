@@ -43,17 +43,17 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/60 backdrop-blur-md transition-opacity"
         onClick={onClose}
       />
       
       {/* Modal */}
       <div 
         className={cn(
-          'relative w-full max-w-lg mx-4 bg-gaming-card border border-gaming-border rounded-xl shadow-2xl shadow-primary-400/20 max-h-[90vh] overflow-y-auto',
+          'relative w-full max-w-lg bg-gaming-card border border-gaming-border rounded-xl shadow-2xl shadow-primary-400/20 max-h-[90vh] overflow-y-auto my-auto animate-in fade-in-0 zoom-in-95 duration-300',
           className
         )}
         onClick={(e) => e.stopPropagation()}

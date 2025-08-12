@@ -138,6 +138,7 @@ export function QuestDashboard() {
       loadStats() // Refresh stats after deletion
     } catch (error) {
       console.error('Failed to delete quest:', error)
+      alert(`Failed to delete quest: ${error instanceof Error ? error.message : 'Unknown error'}`)
     }
   }
 

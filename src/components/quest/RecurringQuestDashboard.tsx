@@ -91,14 +91,15 @@ export function RecurringQuestDashboard() {
     }
 
     try {
-      const response = await fetch(`/api/tasks/recurring/${questId}`, {
+      const response = await fetch(`/api/tasks/recurring?id=${questId}`, {
         method: 'DELETE',
       })
 
       if (response.ok) {
         setRecurringQuests(prev => prev.filter(q => q.id !== questId))
       } else {
-        setError('Failed to delete recurring quest')
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+        setError(`Failed to delete recurring quest: ${errorData.error || 'Unknown error'}`)
       }
     } catch (error) {
       console.error('Error deleting recurring quest:', error)

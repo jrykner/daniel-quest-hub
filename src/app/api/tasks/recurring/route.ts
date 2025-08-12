@@ -227,3 +227,57 @@ export async function GET() {
     );
   }
 }
+
+// DELETE /api/tasks/recurring - Delete a recurring task
+export async function DELETE(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+    
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(request.url);
+    const taskId = searchParams.get('id');
+
+    if (!taskId) {
+      return NextResponse.json({ error: 'Task ID is required' }, { status: 400 });
+    }
+
+    // Get user
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
+
+    // Check if task exists and user has permission
+    const existingTask = await prisma.task.findUnique({
+      where: { id: taskId, isRecurring: true }
+    });
+
+    if (!existingTask) {
+      return NextResponse.json({ error: 'Recurring task not found' }, { status: 404 });
+    }
+
+    // Check deletion permissions based on role
+    const canDelete = user.role === UserRole.PARENT 
+      ? (existingTask.createdById === session.user.id || existingTask.assignedToId === session.user.id)
+      : (existingTask.createdById === session.user.id);
+
+    if (!canDelete) {
+      return NextResponse.json({ error: 'Forbidden: You can only delete tasks you created' + (user.role === UserRole.PARENT ? ' or are assigned to' : '') }, { status: 403 });
+    }
+
+    await prisma.task.delete({
+      where: { id: taskId }
+    });
+
+    return NextResponse.json({ message: 'Recurring task deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting recurring task:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
