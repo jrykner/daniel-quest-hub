@@ -19,8 +19,10 @@ export async function GET() {
       }, { status: 400 });
     }
 
-    // Get base URL for redirects (Vercel sets VERCEL_URL, fallback to NEXTAUTH_URL or localhost)
+    // Get base URL for redirects - prioritize production domain
     const baseUrl = process.env.NEXTAUTH_URL || 
+                   // Use production domain if we're on Vercel
+                   (process.env.VERCEL_ENV === 'production' && process.env.VERCEL_URL ? 'https://daniel-quest-hub.vercel.app' : null) ||
                    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
                    'http://localhost:3000';
 
@@ -36,6 +38,7 @@ export async function GET() {
     console.log('Google OAuth Redirect URI:', redirectUri);
     console.log('Base URL:', baseUrl);
     console.log('VERCEL_URL:', process.env.VERCEL_URL);
+    console.log('VERCEL_ENV:', process.env.VERCEL_ENV);
     console.log('NEXTAUTH_URL:', process.env.NEXTAUTH_URL);
 
     const oauth2Client = new google.auth.OAuth2({

@@ -11,16 +11,20 @@ export async function GET(request: NextRequest) {
   // const state = searchParams.get('state'); // This should be the user email
   
   if (!code) {
-    // Get base URL for redirects (Vercel sets VERCEL_URL, fallback to NEXTAUTH_URL or localhost)
+    // Get base URL for redirects - prioritize production domain
     const baseUrl = process.env.NEXTAUTH_URL || 
+                   // Use production domain if we're on Vercel
+                   (process.env.VERCEL_ENV === 'production' && process.env.VERCEL_URL ? 'https://daniel-quest-hub.vercel.app' : null) ||
                    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
                    'http://localhost:3000';
     return NextResponse.redirect(`${baseUrl}/?error=no_code`);
   }
 
   try {
-    // Get base URL for redirects (Vercel sets VERCEL_URL, fallback to NEXTAUTH_URL or localhost)
+    // Get base URL for redirects - prioritize production domain
     const baseUrl = process.env.NEXTAUTH_URL || 
+                   // Use production domain if we're on Vercel
+                   (process.env.VERCEL_ENV === 'production' && process.env.VERCEL_URL ? 'https://daniel-quest-hub.vercel.app' : null) ||
                    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
                    'http://localhost:3000';
 
@@ -76,8 +80,10 @@ export async function GET(request: NextRequest) {
     );
   } catch (error) {
     console.error('Error in Google Calendar callback:', error);
-    // Get base URL for error redirect
+    // Get base URL for error redirect - prioritize production domain
     const errorBaseUrl = process.env.NEXTAUTH_URL || 
+                        // Use production domain if we're on Vercel
+                        (process.env.VERCEL_ENV === 'production' && process.env.VERCEL_URL ? 'https://daniel-quest-hub.vercel.app' : null) ||
                         (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
                         'http://localhost:3000';
     return NextResponse.redirect(
