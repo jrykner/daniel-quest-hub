@@ -1,6 +1,7 @@
 export type QuestPriority = 'low' | 'medium' | 'high' | 'critical'
 export type QuestStatus = 'active' | 'completed' | 'paused'
 export type QuestCategory = 'school' | 'health' | 'chores' | 'personal'
+export type RecurrenceType = 'daily' | 'weekly' | 'monthly'
 
 export interface QuestUser {
   id: string
@@ -8,19 +9,31 @@ export interface QuestUser {
   role: string
 }
 
+export interface RecurrencePattern {
+  type: RecurrenceType
+  interval: number // Every X days/weeks/months
+  daysOfWeek?: number[] // For weekly: 0=Sunday, 1=Monday, etc.
+  endDate?: Date
+  maxOccurrences?: number
+}
+
 export interface Quest {
   id: string
   title: string
-  description: string
+  description: string | null
   priority: QuestPriority
   status: QuestStatus
   category: QuestCategory
   xpReward: number
   createdAt: Date
-  completedAt?: Date
-  dueDate?: Date
+  completedAt?: Date | null
+  dueDate?: Date | null
   assignedTo: QuestUser
   createdBy: QuestUser
+  isRecurring?: boolean
+  recurrencePattern?: RecurrencePattern
+  googleCalendarEventId?: string | null
+  syncToCalendar?: boolean
 }
 
 export interface PlayerStats {

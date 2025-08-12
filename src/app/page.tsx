@@ -6,14 +6,15 @@ import { useEffect, useState } from 'react'
 import { QuestDashboard } from '../components/quest/QuestDashboard'
 import { AchievementDashboard } from '../components/quest/AchievementDashboard'
 import { LevelProgress } from '../components/quest/LevelProgress'
+import { RecurringQuestDashboard } from '../components/quest/RecurringQuestDashboard'
 import { Button } from '../components/ui/Button'
-import { Home as HomeIcon, Trophy, BarChart3 } from 'lucide-react'
+import { Home as HomeIcon, Trophy, BarChart3, Repeat } from 'lucide-react'
 import { PlayerStats, Achievement } from '../types/quest'
 
 export default function Home() {
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [activeView, setActiveView] = useState<'quests' | 'achievements' | 'progress'>('quests')
+  const [activeView, setActiveView] = useState<'quests' | 'achievements' | 'progress' | 'recurring'>('quests')
   const [stats] = useState<PlayerStats>({
     totalXP: 0,
     level: 1,
@@ -70,6 +71,15 @@ export default function Home() {
               </Button>
               
               <Button
+                variant={activeView === 'recurring' ? 'gaming' : 'ghost'}
+                size="sm"
+                onClick={() => setActiveView('recurring')}
+              >
+                <Repeat className="h-4 w-4 mr-1" />
+                Recurring
+              </Button>
+              
+              <Button
                 variant={activeView === 'achievements' ? 'gaming' : 'ghost'}
                 size="sm"
                 onClick={() => setActiveView('achievements')}
@@ -94,6 +104,7 @@ export default function Home() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-6">
         {activeView === 'quests' && <QuestDashboard />}
+        {activeView === 'recurring' && <RecurringQuestDashboard />}
         {activeView === 'achievements' && (
           <AchievementDashboard stats={stats} userAchievements={achievements} />
         )}

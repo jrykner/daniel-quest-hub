@@ -24,6 +24,12 @@
 .DS_Store
 *.pem
 
+# credentials and sensitive files
+/credentials/
+token.json
+gcp-oauth.keys.json
+*.keys.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*
