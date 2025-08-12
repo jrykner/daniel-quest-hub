@@ -151,6 +151,11 @@ export function RecurringQuestDashboard() {
         throw new Error('No authorization URL received')
       }
       
+      // Show the redirect URI that will be used
+      if (data.debugInfo) {
+        alert(`Debug Info - Redirect URI: ${data.debugInfo.redirectUri}\nBase URL: ${data.debugInfo.baseUrl}`)
+      }
+      
       window.open(data.authUrl, '_blank')
     } catch (error) {
       console.error('Error connecting to calendar:', error)
