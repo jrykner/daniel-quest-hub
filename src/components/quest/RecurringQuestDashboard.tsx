@@ -158,7 +158,7 @@ export function RecurringQuestDashboard() {
                 Recurring Quests
               </h1>
               <p className="text-sm text-text-secondary">
-                Manage your repeating tasks and habits
+                Create and manage repeating tasks for Daniel - calendar sync optional
               </p>
             </div>
           </div>
@@ -170,10 +170,10 @@ export function RecurringQuestDashboard() {
               variant="outline"
               size="sm"
               onClick={handleConnectCalendar}
-              className="text-yellow-400 border-yellow-400/20 hover:bg-yellow-400/10"
+              className="text-blue-400 border-blue-400/20 hover:bg-blue-400/10"
             >
               <Calendar className="h-4 w-4 mr-2" />
-              Connect Calendar
+              Connect Daniel&apos;s Calendar (Optional)
             </Button>
           )}
           
@@ -189,15 +189,15 @@ export function RecurringQuestDashboard() {
 
       {/* Calendar Status */}
       {isCalendarConnected && (
-        <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+        <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
           <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4 text-green-400" />
-            <span className="text-sm font-medium text-green-400">
-              Google Calendar Connected
+            <Calendar className="h-3 w-3 text-green-400" />
+            <span className="text-xs font-medium text-green-400">
+              ✅ Daniel&apos;s Google Calendar Connected
             </span>
           </div>
           <p className="text-xs text-green-300 mt-1">
-            Your recurring quests will automatically sync to your calendar
+            Recurring quests will sync to Daniel&apos;s calendar automatically
           </p>
         </div>
       )}

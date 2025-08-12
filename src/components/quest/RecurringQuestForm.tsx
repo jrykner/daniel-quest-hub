@@ -341,45 +341,55 @@ export function RecurringQuestForm({ onSave, onCancel, isLoading }: RecurringQue
           )}
         </div>
 
-        {/* Calendar Integration */}
+        {/* Calendar Integration - Optional */}
         <div className="space-y-4 border-t border-gaming-border pt-4">
-          <h4 className="font-medium text-text-primary flex items-center gap-2">
-            📅 Calendar Integration
-          </h4>
+          <div className="flex items-center justify-between">
+            <h4 className="font-medium text-text-primary flex items-center gap-2">
+              📅 Calendar Integration
+              <span className="text-xs text-text-secondary font-normal">(Optional)</span>
+            </h4>
+          </div>
           
-          {isCalendarConnected ? (
-            <div className="flex items-center gap-3">
-              <input
-                type="checkbox"
-                id="syncToCalendar"
-                checked={formData.syncToCalendar}
-                onChange={(e) => setFormData(prev => ({ ...prev, syncToCalendar: e.target.checked }))}
-                className="rounded border-gaming-border text-primary-400 focus:ring-primary-400 focus:ring-offset-0"
-              />
-              <label htmlFor="syncToCalendar" className="text-sm text-text-primary">
-                Sync to Google Calendar
-              </label>
-            </div>
-          ) : (
-            <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
-              <p className="text-sm text-yellow-400 mb-2">
-                📍 Connect Google Calendar to sync your recurring quests automatically
-              </p>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  fetch('/api/auth/google-calendar')
-                    .then(res => res.json())
-                    .then(data => window.open(data.authUrl, '_blank'))
-                    .catch(console.error)
-                }}
-              >
-                Connect Google Calendar
-              </Button>
-            </div>
-          )}
+          <div className="bg-gaming-card/20 border border-gaming-border/50 rounded-lg p-3">
+            <p className="text-xs text-text-secondary mb-3">
+              💡 You can create recurring quests without connecting a calendar. Calendar sync is optional and helps Daniel see tasks in his Google Calendar.
+            </p>
+            
+            {isCalendarConnected ? (
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  id="syncToCalendar"
+                  checked={formData.syncToCalendar}
+                  onChange={(e) => setFormData(prev => ({ ...prev, syncToCalendar: e.target.checked }))}
+                  className="rounded border-gaming-border text-primary-400 focus:ring-primary-400 focus:ring-offset-0"
+                />
+                <label htmlFor="syncToCalendar" className="text-sm text-text-primary">
+                  ✅ Sync to Daniel&apos;s Google Calendar
+                </label>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <p className="text-sm text-text-secondary">
+                  🔗 No calendar connected. Tasks will be created without calendar sync.
+                </p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    fetch('/api/auth/google-calendar')
+                      .then(res => res.json())
+                      .then(data => window.open(data.authUrl, '_blank'))
+                      .catch(console.error)
+                  }}
+                  className="text-xs"
+                >
+                  Connect Daniel&apos;s Google Calendar (Optional)
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="flex justify-end gap-3 pt-4">
