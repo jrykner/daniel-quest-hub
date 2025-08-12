@@ -30,10 +30,18 @@ export async function GET() {
       }, { status: 400 });
     }
 
+    const redirectUri = `${baseUrl}/api/auth/google-calendar/callback`;
+    
+    // Log the redirect URI for debugging (remove this after fixing)
+    console.log('Google OAuth Redirect URI:', redirectUri);
+    console.log('Base URL:', baseUrl);
+    console.log('VERCEL_URL:', process.env.VERCEL_URL);
+    console.log('NEXTAUTH_URL:', process.env.NEXTAUTH_URL);
+
     const oauth2Client = new google.auth.OAuth2({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      redirectUri: `${baseUrl}/api/auth/google-calendar/callback`,
+      redirectUri: redirectUri,
     });
 
     const authUrl = oauth2Client.generateAuthUrl({
@@ -42,7 +50,14 @@ export async function GET() {
       state: session.user?.email || undefined, // Include user identifier in state
     });
 
-    return NextResponse.json({ authUrl });
+    return NextResponse.json({ 
+      authUrl,
+      // Include debug info in response (remove this after fixing)
+      debugInfo: {
+        redirectUri,
+        baseUrl
+      }
+    });
   } catch (error) {
     console.error('Error generating Google Calendar auth URL:', error);
     return NextResponse.json({ 

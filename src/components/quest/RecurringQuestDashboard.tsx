@@ -144,6 +144,9 @@ export function RecurringQuestDashboard() {
       
       const data = await response.json()
       
+      // Temporary debug logging
+      console.log('OAuth Response:', data)
+      
       if (!data.authUrl) {
         throw new Error('No authorization URL received')
       }
