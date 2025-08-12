@@ -4,7 +4,7 @@
 
 Transform everyday tasks into epic quests! Daniel's Quest Hub is a modern, gaming-inspired task management application designed specifically for the Rykner family, featuring a stunning cyan color scheme that appeals to a 13-year-old gamer while maintaining functionality for the whole family.
 
-![Quest Hub Preview](https://img.shields.io/badge/Status-In%20Development-cyan?style=for-the-badge)
+![Quest Hub Preview](https://img.shields.io/badge/Status-Ready%20for%20Deployment-green?style=for-the-badge)
 ![Next.js](https://img.shields.io/badge/Next.js-15.4.6-black?style=for-the-badge&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?style=for-the-badge&logo=typescript)
 ![Tailwind](https://img.shields.io/badge/Tailwind-4.0+-cyan?style=for-the-badge&logo=tailwindcss)
@@ -43,8 +43,10 @@ Transform everyday tasks into epic quests! Daniel's Quest Hub is a modern, gamin
 - **[Tailwind CSS 4.0](https://tailwindcss.com/)** - Utility-first styling
 
 ### Backend & Database
-- **Next.js API Routes** - Serverless backend functions
+- **[Next.js API Routes](https://nextjs.org/docs/api-routes/introduction)** - Serverless backend functions
+- **[Prisma ORM](https://prisma.io/)** - Type-safe database access
 - **PostgreSQL** - Robust relational database (Vercel Postgres)
+- **[NextAuth.js](https://next-auth.js.org/)** - Secure authentication
 
 ### Deployment
 - **[Vercel](https://vercel.com/)** - Optimized hosting platform
@@ -123,6 +125,43 @@ Perfect for daily and weekly routines:
 - **Weekly Room Cleanup** - Chores quest (High priority, 50 XP)
 - **School Homework** - Education quest (Critical priority, 100 XP)
 
+## 🔧 API Endpoints
+
+### Tasks Management
+- `GET /api/tasks` - Get all user tasks
+- `POST /api/tasks` - Create new task
+- `PUT /api/tasks/[id]` - Update task
+- `DELETE /api/tasks/[id]` - Delete task
+
+### Recurring Tasks
+- `GET /api/tasks/recurring` - Get recurring task templates
+- `POST /api/tasks/recurring` - Create recurring task with instances
+
+### User Statistics
+- `GET /api/users/stats` - Get user XP and achievement data
+
+### Google Calendar Integration
+- `GET /api/auth/google-calendar` - Initiate OAuth flow
+- `GET /api/auth/google-calendar/callback` - Handle OAuth callback
+- `POST /api/calendar/sync` - Sync tasks with Google Calendar
+
+## ⚙️ Environment Setup
+
+Create a `.env.local` file with the following variables:
+
+```bash
+# Database
+DATABASE_URL="postgresql://..."
+
+# Authentication
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-secret-key"
+
+# Google Calendar (Optional)
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+```
+
 ## 🚀 Deployment
 
 ### Vercel Deployment
@@ -135,31 +174,37 @@ npm run build
 npm start
 ```
 
-## 🎯 Development Roadmap
+## 🎯 Development Progress
 
 ### Phase 1: Foundation ✅
-- [x] Project setup and structure
-- [x] Gaming-themed UI components
-- [x] Responsive design system
-- [x] Basic page layouts
+- [x] Project setup with Next.js 15 and TypeScript
+- [x] Gaming-themed UI components with Tailwind CSS
+- [x] Responsive design system with cyan color scheme
+- [x] Basic page layouts and navigation
 
-### Phase 2: Core Features 🔄
-- [ ] User authentication system
-- [ ] Task CRUD operations
-- [ ] XP and achievement system
-- [ ] Family role management
+### Phase 2: Core Features ✅
+- [x] NextAuth.js authentication system
+- [x] Complete task CRUD operations
+- [x] XP rewards and progress tracking
+- [x] Family role management (parents/children)
 
-### Phase 3: Advanced Features ⏳
-- [ ] Recurring task automation
-- [ ] Google Calendar integration
-- [ ] Real-time notifications
-- [ ] Progress analytics
+### Phase 3: Advanced Features ✅
+- [x] Recurring task automation (daily/weekly/monthly)
+- [x] Google Calendar integration with OAuth
+- [x] Task priority system and categories
+- [x] Progress analytics and statistics
 
-### Phase 4: Polish & Launch ⏳
-- [ ] Performance optimization
-- [ ] Testing and bug fixes
-- [ ] Final deployment
-- [ ] Family onboarding
+### Phase 4: Gaming Features ✅
+- [x] XP system with priority-based rewards
+- [x] Achievement system framework
+- [x] Gaming-style animations and effects
+- [x] Quest-themed UI with neon effects
+
+### Phase 5: Polish & Deployment ✅
+- [x] Performance optimization and bundle analysis
+- [x] Enhanced UI/UX with advanced animations
+- [x] Comprehensive error handling
+- [x] Production-ready deployment configuration
 
 ---
 
