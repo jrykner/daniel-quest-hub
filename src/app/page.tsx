@@ -60,54 +60,54 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-gaming">
       {/* Navigation Header */}
-      <div className="border-b border-gaming-border bg-gaming-card/50 backdrop-blur-sm sticky top-0 z-40 slide-in-left">
+      <div className="border-b border-gaming-border bg-gaming-card/60 backdrop-blur-md sticky top-0 z-50 shadow-lg">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <h1 className="font-gaming text-2xl font-bold float-animation">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <h1 className="font-gaming text-2xl sm:text-3xl font-bold float-animation">
               <span className="title-gradient text-glow">
                 Daniel&apos;s Quest Hub
               </span>
             </h1>
             
-            <div className="flex gap-3 slide-in-right">
+            <div className="flex flex-wrap gap-2 sm:gap-3 w-full sm:w-auto">
               <Button
                 variant={activeView === 'quests' ? 'gaming' : 'ghost'}
                 size="sm"
                 onClick={() => setActiveView('quests')}
-                className={`button-glow transition-all duration-300 ${activeView === 'quests' ? 'neon-glow' : ''}`}
+                className={`button-glow transition-all duration-300 flex-1 sm:flex-none ${activeView === 'quests' ? 'neon-glow' : ''}`}
               >
-                <HomeIcon className="h-4 w-4 mr-2" />
-                Quests
+                <HomeIcon className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline ml-2">Quests</span>
               </Button>
               
               <Button
                 variant={activeView === 'recurring' ? 'gaming' : 'ghost'}
                 size="sm"
                 onClick={() => setActiveView('recurring')}
-                className={`button-glow transition-all duration-300 ${activeView === 'recurring' ? 'neon-glow' : ''}`}
+                className={`button-glow transition-all duration-300 flex-1 sm:flex-none ${activeView === 'recurring' ? 'neon-glow' : ''}`}
               >
-                <Repeat className="h-4 w-4 mr-2" />
-                Recurring
+                <Repeat className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline ml-2">Recurring</span>
               </Button>
               
               <Button
                 variant={activeView === 'achievements' ? 'gaming' : 'ghost'}
                 size="sm"
                 onClick={() => setActiveView('achievements')}
-                className={`button-glow transition-all duration-300 ${activeView === 'achievements' ? 'neon-glow' : ''}`}
+                className={`button-glow transition-all duration-300 flex-1 sm:flex-none ${activeView === 'achievements' ? 'neon-glow' : ''}`}
               >
-                <Trophy className="h-4 w-4 mr-2" />
-                Achievements
+                <Trophy className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline ml-2">Awards</span>
               </Button>
               
               <Button
                 variant={activeView === 'progress' ? 'gaming' : 'ghost'}
                 size="sm"
                 onClick={() => setActiveView('progress')}
-                className={`button-glow transition-all duration-300 ${activeView === 'progress' ? 'neon-glow' : ''}`}
+                className={`button-glow transition-all duration-300 flex-1 sm:flex-none ${activeView === 'progress' ? 'neon-glow' : ''}`}
               >
-                <BarChart3 className="h-4 w-4 mr-2" />
-                Progress
+                <BarChart3 className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline ml-2">Progress</span>
               </Button>
             </div>
           </div>
@@ -115,8 +115,8 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="fade-in-up">
+      <div className="container mx-auto px-4 py-6 pt-8">
+        <div className="fade-in-up max-w-7xl mx-auto">
           {activeView === 'quests' && <QuestDashboard />}
           {activeView === 'recurring' && <RecurringQuestDashboard />}
           {activeView === 'achievements' && (

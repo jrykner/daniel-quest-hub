@@ -206,17 +206,19 @@ export function QuestDashboard() {
   ).length
 
   return (
-    <div className="min-h-screen bg-gradient-gaming">
-      <div className="container mx-auto px-4 py-8">
-        {/* User Profile */}
+    <div className="space-y-8">
+      {/* User Profile */}
+      <div className="slide-in-left">
         <UserProfile />
-        
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row gap-6 mb-8">
+      </div>
+      
+      {/* Header */}
+      <div className="bg-gaming-card/40 border border-gaming-border rounded-xl p-6 backdrop-blur-sm slide-in-right">
+        <div className="flex flex-col lg:flex-row gap-6">
           <div className="flex-1">
             <h1 className="font-gaming text-4xl font-bold mb-2">
-              <span className="gaming-gradient bg-clip-text text-transparent">
-                Daniel&apos;s Quest Hub
+              <span className="title-gradient bg-clip-text text-transparent text-glow">
+                Quest Dashboard
               </span>
             </h1>
             <p className="text-text-secondary text-lg">
@@ -228,6 +230,7 @@ export function QuestDashboard() {
             <StatsCard stats={stats} />
           </div>
         </div>
+      </div>
 
         {/* Quick Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -400,7 +403,6 @@ export function QuestDashboard() {
             }}
           />
         </Modal>
-      </div>
     </div>
   )
 }
