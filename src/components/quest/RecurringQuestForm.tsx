@@ -377,11 +377,22 @@ export function RecurringQuestForm({ onSave, onCancel, isLoading }: RecurringQue
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={() => {
-                    fetch('/api/auth/google-calendar')
-                      .then(res => res.json())
-                      .then(data => window.open(data.authUrl, '_blank'))
-                      .catch(console.error)
+                  onClick={async () => {
+                    try {
+                      const response = await fetch('/api/auth/google-calendar')
+                      if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+                        throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`)
+                      }
+                      const data = await response.json()
+                      if (!data.authUrl) {
+                        throw new Error('No authorization URL received')
+                      }
+                      window.open(data.authUrl, '_blank')
+                    } catch (error) {
+                      console.error('Error connecting to calendar:', error)
+                      alert(`Failed to connect to calendar: ${error instanceof Error ? error.message : 'Unknown error'}`)
+                    }
                   }}
                   className="text-xs"
                 >

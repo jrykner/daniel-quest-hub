@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../../lib/auth';
-import { PrismaClient, TaskPriority, TaskCategory } from '../../../../generated/prisma';
+import { PrismaClient, TaskPriority, TaskCategory, UserRole } from '../../../../generated/prisma';
 import { RecurringTaskService } from '@/services/recurringTasks';
 import GoogleCalendarService from '@/services/googleCalendar';
 
@@ -182,15 +182,32 @@ export async function GET() {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // Get all recurring base tasks created by or assigned to the user
+    // Build where clause based on user role for recurring tasks
+    const whereClause = user.role === UserRole.PARENT 
+      ? {
+          isRecurring: true,
+          OR: [
+            { assignedToId: user.id }, // Tasks assigned to parent
+            { createdById: user.id },   // Tasks created by parent
+            { 
+              assignedTo: { role: { equals: UserRole.CHILD } }     // Tasks assigned to any child
+            },
+            {
+              createdBy: { role: { equals: UserRole.PARENT } }     // Tasks created by any parent
+            }
+          ]
+        }
+      : {
+          isRecurring: true,
+          OR: [
+            { assignedToId: user.id },
+            { createdById: user.id }
+          ]
+        }
+
+    // Get all recurring base tasks based on visibility rules
     const recurringTasks = await prisma.task.findMany({
-      where: {
-        isRecurring: true,
-        OR: [
-          { createdById: user.id },
-          { assignedToId: user.id },
-        ],
-      },
+      where: whereClause,
       include: {
         assignedTo: true,
         createdBy: true,

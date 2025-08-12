@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../../../lib/auth'
 import { prisma } from '../../../lib/db'
-import { TaskPriority, TaskCategory } from '../../../generated/prisma'
+import { TaskPriority, TaskCategory, UserRole } from '../../../generated/prisma'
 
 // GET /api/tasks - Get all tasks for the user
 export async function GET() {
@@ -13,13 +13,46 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    // Get current user info to determine visibility rules
+    const currentUser = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { id: true, role: true }
+    })
+
+    if (!currentUser) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+    }
+
+    // Build where clause based on user role
+    const whereClause = currentUser.role === UserRole.PARENT 
+      ? {
+          // Parents can see:
+          // 1. Tasks they created or are assigned to
+          // 2. All tasks assigned to children (regardless of who created them)
+          // 3. All tasks created by other parents
+          OR: [
+            { assignedToId: session.user.id }, // Tasks assigned to parent
+            { createdById: session.user.id },   // Tasks created by parent
+            { 
+              assignedTo: { role: { equals: UserRole.CHILD } }     // Tasks assigned to any child
+            },
+            {
+              createdBy: { role: { equals: UserRole.PARENT } }     // Tasks created by any parent
+            }
+          ]
+        }
+      : {
+          // Children can see:
+          // 1. Tasks assigned to them
+          // 2. Tasks they created
+          OR: [
+            { assignedToId: session.user.id },
+            { createdById: session.user.id }
+          ]
+        }
+
     const tasks = await prisma.task.findMany({
-      where: {
-        OR: [
-          { assignedToId: session.user.id },
-          { createdById: session.user.id }
-        ]
-      },
+      where: whereClause,
       include: {
         assignedTo: {
           select: {
