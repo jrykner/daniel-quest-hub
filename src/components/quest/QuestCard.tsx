@@ -39,10 +39,10 @@ export function QuestCard({
   
   return (
     <Card 
-      className={`transition-all duration-300 hover:scale-[1.02] ${
+      className={`gaming-card-enhanced transition-all duration-300 hover:scale-[1.02] fade-in-up ${
         isCompleted ? 'opacity-75' : ''
       } ${
-        isOverdue ? 'border-red-400/50 shadow-red-400/20' : ''
+        isOverdue ? 'border-red-400/50 shadow-red-400/20 neon-glow' : ''
       }`}
     >
       <CardHeader className="pb-3">
@@ -56,9 +56,9 @@ export function QuestCard({
                 {quest.priority.toUpperCase()}
               </span>
             </div>
-            <h3 className={`font-gaming text-lg font-semibold leading-tight ${
-              isCompleted ? 'line-through text-text-secondary' : 'text-text-primary'
-            }`}>
+            <h3 className={`font-gaming text-lg font-semibold leading-tight transition-all duration-300 ${
+              isCompleted ? 'line-through text-text-secondary' : 'text-text-primary text-glow'
+            } ${isOverdue ? 'text-red-400' : ''}`}>
               {quest.title}
             </h3>
             {quest.description && (
@@ -101,15 +101,15 @@ export function QuestCard({
           )}
           
           
-          <div className="flex items-center gap-1 text-primary-400">
-            <Star className="h-4 w-4" />
-            <span className="font-medium">{quest.xpReward} XP</span>
+          <div className="flex items-center gap-1 text-primary-400 float-animation">
+            <Star className="h-4 w-4 text-glow" />
+            <span className="font-medium text-glow">{quest.xpReward} XP</span>
           </div>
           
           {(quest.isRecurring || quest.title.includes('#')) && (
-            <div className="flex items-center gap-1 text-blue-400">
+            <div className="flex items-center gap-1 text-blue-400 neon-glow">
               <Repeat className="h-4 w-4" />
-              <span className="font-medium text-xs">RECURRING</span>
+              <span className="font-medium text-xs bg-blue-400/10 px-2 py-1 rounded-full border border-blue-400/30">RECURRING</span>
             </div>
           )}
         </div>
@@ -134,7 +134,7 @@ export function QuestCard({
                   variant="outline"
                   size="sm"
                   onClick={() => onToggleStatus(quest.id)}
-                  className="h-8 text-xs px-3"
+                  className="h-8 text-xs px-3 button-glow transition-all duration-300 hover:scale-105"
                 >
                   {quest.status === 'active' ? (
                     <>
@@ -153,7 +153,7 @@ export function QuestCard({
                   variant="gaming"
                   size="sm"
                   onClick={() => onComplete(quest.id)}
-                  className="h-8 text-xs px-3"
+                  className="h-8 text-xs px-3 button-glow neon-glow transition-all duration-300 hover:scale-105"
                 >
                   <CheckCircle2 className="h-3 w-3 mr-1" />
                   Complete

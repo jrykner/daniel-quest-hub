@@ -231,34 +231,34 @@ export function QuestDashboard() {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-gaming-card border border-gaming-border rounded-lg p-4 text-center">
+          <div className="gaming-card-enhanced text-center float-animation">
             <div className="flex items-center justify-center gap-2 mb-2">
-              <Target className="h-5 w-5 text-primary-400" />
-              <span className="text-2xl font-bold text-primary-400">{activeQuests}</span>
+              <Target className="h-5 w-5 text-primary-400 text-glow" />
+              <span className="text-3xl font-bold text-primary-400 title-gradient">{activeQuests}</span>
             </div>
             <p className="text-sm text-text-secondary">Active Quests</p>
           </div>
           
-          <div className="bg-gaming-card border border-gaming-border rounded-lg p-4 text-center">
+          <div className="gaming-card-enhanced text-center float-animation" style={{animationDelay: '0.1s'}}>
             <div className="flex items-center justify-center gap-2 mb-2">
-              <CheckCircle2 className="h-5 w-5 text-green-400" />
-              <span className="text-2xl font-bold text-green-400">{completedQuests}</span>
+              <CheckCircle2 className="h-5 w-5 text-green-400 text-glow" />
+              <span className="text-3xl font-bold text-green-400">{completedQuests}</span>
             </div>
             <p className="text-sm text-text-secondary">Completed</p>
           </div>
           
-          <div className="bg-gaming-card border border-gaming-border rounded-lg p-4 text-center">
+          <div className="gaming-card-enhanced text-center float-animation" style={{animationDelay: '0.2s'}}>
             <div className="flex items-center justify-center gap-2 mb-2">
-              <Clock className="h-5 w-5 text-red-400" />
-              <span className="text-2xl font-bold text-red-400">{overdue}</span>
+              <Clock className="h-5 w-5 text-red-400 text-glow" />
+              <span className="text-3xl font-bold text-red-400">{overdue}</span>
             </div>
             <p className="text-sm text-text-secondary">Overdue</p>
           </div>
           
-          <div className="bg-gaming-card border border-gaming-border rounded-lg p-4 text-center">
+          <div className="gaming-card-enhanced text-center float-animation" style={{animationDelay: '0.3s'}}>
             <div className="flex items-center justify-center gap-2 mb-2">
-              <Trophy className="h-5 w-5 text-yellow-400" />
-              <span className="text-2xl font-bold text-yellow-400">{stats.level}</span>
+              <Trophy className="h-5 w-5 text-yellow-400 text-glow" />
+              <span className="text-3xl font-bold text-yellow-400">{stats.level}</span>
             </div>
             <p className="text-sm text-text-secondary">Current Level</p>
           </div>
@@ -289,7 +289,7 @@ export function QuestDashboard() {
           <Button
             onClick={openNewQuestModal}
             variant="gaming"
-            className="shrink-0"
+            className="shrink-0 button-glow neon-glow transition-all duration-300 hover:scale-105 float-animation"
           >
             <Plus className="h-4 w-4 mr-2" />
             New Quest

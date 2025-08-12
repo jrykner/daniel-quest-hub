@@ -36,9 +36,18 @@ export default function Home() {
   if (status === 'loading') {
     return (
       <div className="min-h-screen bg-gradient-gaming flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-400 mx-auto mb-4"></div>
-          <p className="text-primary-400 text-lg font-gaming">Loading Quest Hub...</p>
+        <div className="text-center fade-in-up">
+          <div className="relative">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-4 border-primary-400 mx-auto mb-6 neon-glow"></div>
+            <div className="absolute inset-0 animate-pulse rounded-full h-32 w-32 border-4 border-primary-400/20 mx-auto"></div>
+          </div>
+          <h2 className="text-primary-400 text-2xl font-gaming mb-2 title-gradient">Loading Quest Hub...</h2>
+          <p className="text-text-secondary text-sm">Preparing your epic adventure</p>
+          <div className="flex justify-center mt-4 space-x-1">
+            <div className="w-2 h-2 bg-primary-400 rounded-full animate-bounce"></div>
+            <div className="w-2 h-2 bg-primary-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+            <div className="w-2 h-2 bg-primary-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+          </div>
         </div>
       </div>
     )
@@ -51,22 +60,23 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-gaming">
       {/* Navigation Header */}
-      <div className="border-b border-gaming-border bg-gaming-card/50 backdrop-blur-sm sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-3">
+      <div className="border-b border-gaming-border bg-gaming-card/50 backdrop-blur-sm sticky top-0 z-40 slide-in-left">
+        <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="font-gaming text-xl font-bold">
-              <span className="gaming-gradient bg-clip-text text-transparent">
+            <h1 className="font-gaming text-2xl font-bold float-animation">
+              <span className="title-gradient text-glow">
                 Daniel&apos;s Quest Hub
               </span>
             </h1>
             
-            <div className="flex gap-2">
+            <div className="flex gap-3 slide-in-right">
               <Button
                 variant={activeView === 'quests' ? 'gaming' : 'ghost'}
                 size="sm"
                 onClick={() => setActiveView('quests')}
+                className={`button-glow transition-all duration-300 ${activeView === 'quests' ? 'neon-glow' : ''}`}
               >
-                <HomeIcon className="h-4 w-4 mr-1" />
+                <HomeIcon className="h-4 w-4 mr-2" />
                 Quests
               </Button>
               
@@ -74,8 +84,9 @@ export default function Home() {
                 variant={activeView === 'recurring' ? 'gaming' : 'ghost'}
                 size="sm"
                 onClick={() => setActiveView('recurring')}
+                className={`button-glow transition-all duration-300 ${activeView === 'recurring' ? 'neon-glow' : ''}`}
               >
-                <Repeat className="h-4 w-4 mr-1" />
+                <Repeat className="h-4 w-4 mr-2" />
                 Recurring
               </Button>
               
@@ -83,8 +94,9 @@ export default function Home() {
                 variant={activeView === 'achievements' ? 'gaming' : 'ghost'}
                 size="sm"
                 onClick={() => setActiveView('achievements')}
+                className={`button-glow transition-all duration-300 ${activeView === 'achievements' ? 'neon-glow' : ''}`}
               >
-                <Trophy className="h-4 w-4 mr-1" />
+                <Trophy className="h-4 w-4 mr-2" />
                 Achievements
               </Button>
               
@@ -92,8 +104,9 @@ export default function Home() {
                 variant={activeView === 'progress' ? 'gaming' : 'ghost'}
                 size="sm"
                 onClick={() => setActiveView('progress')}
+                className={`button-glow transition-all duration-300 ${activeView === 'progress' ? 'neon-glow' : ''}`}
               >
-                <BarChart3 className="h-4 w-4 mr-1" />
+                <BarChart3 className="h-4 w-4 mr-2" />
                 Progress
               </Button>
             </div>
@@ -102,13 +115,15 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-6">
-        {activeView === 'quests' && <QuestDashboard />}
-        {activeView === 'recurring' && <RecurringQuestDashboard />}
-        {activeView === 'achievements' && (
-          <AchievementDashboard stats={stats} userAchievements={achievements} />
-        )}
-        {activeView === 'progress' && <LevelProgress stats={stats} />}
+      <div className="container mx-auto px-4 py-8">
+        <div className="fade-in-up">
+          {activeView === 'quests' && <QuestDashboard />}
+          {activeView === 'recurring' && <RecurringQuestDashboard />}
+          {activeView === 'achievements' && (
+            <AchievementDashboard stats={stats} userAchievements={achievements} />
+          )}
+          {activeView === 'progress' && <LevelProgress stats={stats} />}
+        </div>
       </div>
     </div>
   )
