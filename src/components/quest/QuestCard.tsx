@@ -15,7 +15,8 @@ import {
   PlayCircle, 
   PauseCircle,
   Edit,
-  Trash2
+  Trash2,
+  Repeat
 } from 'lucide-react'
 
 interface QuestCardProps {
@@ -104,12 +105,19 @@ export function QuestCard({
             <Star className="h-4 w-4" />
             <span className="font-medium">{quest.xpReward} XP</span>
           </div>
+          
+          {(quest.isRecurring || quest.title.includes('#')) && (
+            <div className="flex items-center gap-1 text-blue-400">
+              <Repeat className="h-4 w-4" />
+              <span className="font-medium text-xs">RECURRING</span>
+            </div>
+          )}
         </div>
 
       </CardContent>
 
       <CardFooter className="pt-3">
-        <div className="flex items-center justify-between w-full">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between w-full gap-3">
           <div className="text-xs text-text-secondary">
             Created {format(quest.createdAt, 'MMM d')}
             {quest.completedAt && (
@@ -119,23 +127,23 @@ export function QuestCard({
             )}
           </div>
           
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2 justify-end">
             {!isCompleted && (
               <>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => onToggleStatus(quest.id)}
-                  className="h-8"
+                  className="h-8 text-xs px-3"
                 >
                   {quest.status === 'active' ? (
                     <>
-                      <PauseCircle className="h-4 w-4 mr-1" />
+                      <PauseCircle className="h-3 w-3 mr-1" />
                       Pause
                     </>
                   ) : (
                     <>
-                      <PlayCircle className="h-4 w-4 mr-1" />
+                      <PlayCircle className="h-3 w-3 mr-1" />
                       Resume
                     </>
                   )}
@@ -145,9 +153,9 @@ export function QuestCard({
                   variant="gaming"
                   size="sm"
                   onClick={() => onComplete(quest.id)}
-                  className="h-8"
+                  className="h-8 text-xs px-3"
                 >
-                  <CheckCircle2 className="h-4 w-4 mr-1" />
+                  <CheckCircle2 className="h-3 w-3 mr-1" />
                   Complete
                 </Button>
               </>

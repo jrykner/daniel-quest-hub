@@ -53,6 +53,9 @@ export async function GET() {
       status: task.completedAt ? 'completed' as const : 'active' as const,
       completedAt: task.completedAt?.toISOString(),
       createdAt: task.createdAt.toISOString(),
+      isRecurring: task.isRecurring || false,
+      recurrencePattern: task.recurringPattern ? JSON.parse(task.recurringPattern as string) : undefined,
+      googleCalendarEventId: task.googleCalendarEventId,
       assignedTo: {
         id: task.assignedTo.id,
         name: task.assignedTo.name || 'Unknown',
