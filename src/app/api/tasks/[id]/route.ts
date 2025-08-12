@@ -162,11 +162,11 @@ export async function DELETE(
 
     // Check deletion permissions based on role
     const canDelete = currentUser.role === UserRole.PARENT 
-      ? (existingTask.createdById === session.user.id || existingTask.assignedToId === session.user.id)
-      : (existingTask.createdById === session.user.id)
+      ? true  // Parents can delete any task in the family
+      : (existingTask.createdById === session.user.id)  // Children can only delete tasks they created
 
     if (!canDelete) {
-      return NextResponse.json({ error: 'Forbidden: You can only delete tasks you created' + (currentUser.role === UserRole.PARENT ? ' or are assigned to' : '') }, { status: 403 })
+      return NextResponse.json({ error: 'Forbidden: You can only delete tasks you created' }, { status: 403 })
     }
 
     await prisma.task.delete({
