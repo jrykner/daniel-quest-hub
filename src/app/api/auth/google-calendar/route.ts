@@ -19,16 +19,21 @@ export async function GET() {
       }, { status: 400 });
     }
 
-    if (!process.env.NEXTAUTH_URL) {
+    // Get base URL for redirects (Vercel sets VERCEL_URL, fallback to NEXTAUTH_URL or localhost)
+    const baseUrl = process.env.NEXTAUTH_URL || 
+                   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+                   'http://localhost:3000';
+
+    if (!baseUrl) {
       return NextResponse.json({ 
-        error: 'NEXTAUTH_URL environment variable is not set.' 
+        error: 'Unable to determine base URL for OAuth callback.' 
       }, { status: 400 });
     }
 
     const oauth2Client = new google.auth.OAuth2({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      redirectUri: `${process.env.NEXTAUTH_URL}/api/auth/google-calendar/callback`,
+      redirectUri: `${baseUrl}/api/auth/google-calendar/callback`,
     });
 
     const authUrl = oauth2Client.generateAuthUrl({

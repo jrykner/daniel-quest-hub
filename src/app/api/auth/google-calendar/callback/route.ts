@@ -11,14 +11,23 @@ export async function GET(request: NextRequest) {
   // const state = searchParams.get('state'); // This should be the user email
   
   if (!code) {
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/?error=no_code`);
+    // Get base URL for redirects (Vercel sets VERCEL_URL, fallback to NEXTAUTH_URL or localhost)
+    const baseUrl = process.env.NEXTAUTH_URL || 
+                   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+                   'http://localhost:3000';
+    return NextResponse.redirect(`${baseUrl}/?error=no_code`);
   }
 
   try {
+    // Get base URL for redirects (Vercel sets VERCEL_URL, fallback to NEXTAUTH_URL or localhost)
+    const baseUrl = process.env.NEXTAUTH_URL || 
+                   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+                   'http://localhost:3000';
+
     const oauth2Client = new google.auth.OAuth2({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      redirectUri: `${process.env.NEXTAUTH_URL}/api/auth/google-calendar/callback`,
+      redirectUri: `${baseUrl}/api/auth/google-calendar/callback`,
     });
 
     const { tokens } = await oauth2Client.getToken(code);
@@ -63,12 +72,16 @@ export async function GET(request: NextRequest) {
     });
     
     return NextResponse.redirect(
-      `${process.env.NEXTAUTH_URL}/?calendar_connected=true`
+      `${baseUrl}/?calendar_connected=true`
     );
   } catch (error) {
     console.error('Error in Google Calendar callback:', error);
+    // Get base URL for error redirect
+    const errorBaseUrl = process.env.NEXTAUTH_URL || 
+                        (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+                        'http://localhost:3000';
     return NextResponse.redirect(
-      `${process.env.NEXTAUTH_URL}/?error=calendar_auth_failed`
+      `${errorBaseUrl}/?error=calendar_auth_failed`
     );
   }
 }
